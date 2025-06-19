@@ -16,6 +16,7 @@ const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const constants_1 = require("../utils/miscellaneous/constants");
 const router_1 = __importDefault(require("./router"));
+const erroHandler_1 = __importDefault(require("../common/middleware/erroHandler"));
 class App {
     constructor(port) {
         this.origin = constants_1.origin;
@@ -23,6 +24,7 @@ class App {
         this.port = port;
         this.initMiddleware();
         this.initRouters();
+        this.errorHandler();
     }
     startServer() {
         this.app.listen(this.port, () => {
@@ -41,6 +43,9 @@ class App {
             res.send('Servier is running');
         }));
         this.app.use('/api/v1', new router_1.default().v1Router);
+    }
+    errorHandler() {
+        this.app.use(new erroHandler_1.default().handleErrors);
     }
 }
 exports.default = App;

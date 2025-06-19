@@ -8,7 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const statusCode_1 = __importDefault(require("../../../utils/miscellaneous/statusCode"));
+const customError_1 = __importDefault(require("../../../utils/lib/customError"));
 class Wrapper {
     wrap(schema, cb) {
         return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
@@ -32,6 +37,15 @@ class Wrapper {
             }
             catch (error) {
                 console.log({ error });
+                if (error.isJoi) {
+                    res.status(statusCode_1.default.HTTP_BAD_REQUEST).json({
+                        success: false,
+                        message: error.message,
+                    });
+                }
+                else {
+                    next(new customError_1.default(error.message, error.status));
+                }
             }
         });
     }

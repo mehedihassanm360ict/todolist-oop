@@ -7,7 +7,10 @@ const joi_1 = __importDefault(require("joi"));
 class TodoListValidator {
     constructor() {
         this.createTodoListValidator = joi_1.default.object({
-            title: joi_1.default.string().required(),
+            title: joi_1.default.string().required().messages({
+                'string.empty': 'Title cannot be empty',
+                'any.required': 'title is required'
+            }),
         });
     }
 }

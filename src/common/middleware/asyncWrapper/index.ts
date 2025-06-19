@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
+import StatusCode from "../../../utils/miscellaneous/statusCode";
+import CustomError from "../../../utils/lib/customError";
 
 type Func = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
@@ -34,6 +36,14 @@ class Wrapper {
                 await cb(req, res, next);
             } catch(error: any){    
                 console.log({error});
+                 if (error.isJoi) {
+          res.status(StatusCode.HTTP_BAD_REQUEST).json({
+            success: false,
+            message: error.message,
+          });
+        } else {
+          next(new CustomError(error.message, error.status));
+        }
             }
         }
     }

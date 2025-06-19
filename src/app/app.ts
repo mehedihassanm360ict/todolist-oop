@@ -2,6 +2,7 @@ import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import { origin } from '../utils/miscellaneous/constants';
 import RootRouter from './router';
+import ErrorHandler from '../common/middleware/erroHandler';
 
 class App {
     public app:Application;
@@ -13,6 +14,7 @@ class App {
         this.port = port;
         this.initMiddleware();
         this.initRouters();
+        this.errorHandler();
     }
 
     public startServer(){
@@ -35,6 +37,10 @@ class App {
         })
 
         this.app.use('/api/v1', new RootRouter().v1Router);
+    }
+
+    private errorHandler(){
+        this.app.use(new ErrorHandler().handleErrors);
     }
 }
 
