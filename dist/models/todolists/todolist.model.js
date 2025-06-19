@@ -35,13 +35,20 @@ class TodoListModel extends schema_1.default {
             return data;
         });
     }
-    getTaskList(payload) {
+    getTaskList(list_id) {
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield this.db('todo_lists')
                 .withSchema(this.SCHEMA_DBO)
-                .where((qb) => {
-                qb.andWhere('todo_lists.list_id', payload);
-            });
+                .where('list_id', list_id);
+            return data;
+        });
+    }
+    deleteTaskList(list_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.db('todo_lists')
+                .withSchema(this.SCHEMA_DBO)
+                .where('list_id', list_id)
+                .del();
             return data;
         });
     }

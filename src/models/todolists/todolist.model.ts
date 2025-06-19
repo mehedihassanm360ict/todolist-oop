@@ -27,12 +27,19 @@ class TodoListModel extends Schema{
         return data;
     }
 
-    public async getTaskList(payload: number) {
+    public async getTaskList(list_id: number) {
         const data = await this.db('todo_lists')
         .withSchema(this.SCHEMA_DBO)
-        .where((qb) => {
-            qb.andWhere('todo_lists.list_id', payload)
-        })
+        .where('list_id', list_id);
+
+        return data;
+    }
+
+    public async deleteTaskList(list_id: number) {
+        const data = await this.db('todo_lists')
+        .withSchema(this.SCHEMA_DBO)
+        .where('list_id', list_id)
+        .del();
 
         return data;
     }
