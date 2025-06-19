@@ -17,7 +17,8 @@ class TodoListRouter extends AbstractRouter {
         // get single
         this.router.route('/:list_id')
         .get(this.todoListController.getTaskListController)
-        .delete(this.todoListController.deleteTaskListController);
+        .delete(this.todoListController.deleteTaskListController)
+        .patch(this.todoListController.updateTaskListTitleController);
     }
 }
 

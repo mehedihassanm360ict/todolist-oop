@@ -39,6 +39,17 @@ class TodoListController extends AbstractController{
             res.status(code).json(rest);
         }
     )
+
+    public updateTaskListTitleController = this.asyncWrapper.wrap(
+        {
+            paramSchema: this.todoListValidator.getSingleTodoListValidatior,
+            bodySchema: this.todoListValidator.createTodoListValidator
+        },
+        async (req:Request, res:Response) => {
+            const {code, ...rest} = await this.todoListService.updateTaskListService(req);
+            res.status(code).json(rest);
+        }
+    )
 }
 
 export default TodoListController;

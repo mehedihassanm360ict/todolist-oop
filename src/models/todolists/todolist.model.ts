@@ -11,7 +11,6 @@ class TodoListModel extends Schema{
     }
 
     public async createTaskList(payload: ITodoListPayload){
-        
         const data = await this.db('todo_lists')
         .withSchema(this.SCHEMA_DBO)
         .insert(payload, "list_id")
@@ -40,6 +39,15 @@ class TodoListModel extends Schema{
         .withSchema(this.SCHEMA_DBO)
         .where('list_id', list_id)
         .del();
+
+        return data;
+    }
+
+    public async updateTaskList(list_id: number, payload: any) {
+        const data = await this.db('todo_lists')
+        .withSchema(this.SCHEMA_DBO)
+        .where('list_id', list_id)
+        .update(payload);
 
         return data;
     }
