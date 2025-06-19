@@ -13,43 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const schema_1 = __importDefault(require("../../utils/miscellaneous/schema"));
-class TodoListModel extends schema_1.default {
+class TaskModel extends schema_1.default {
     constructor(db) {
         super();
         this.db = db;
     }
-    createTaskList(payload) {
+    createTask(payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.db('todo_lists')
+            const data = yield this.db('tasks')
                 .withSchema(this.SCHEMA_DBO)
-                .insert(payload, "list_id");
-            return data;
-        });
-    }
-    getTaskLists() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.db('todo_lists')
-                .withSchema(this.SCHEMA_DBO)
-                .select();
-            return data;
-        });
-    }
-    getTaskList(list_id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.db('todo_lists')
-                .withSchema(this.SCHEMA_DBO)
-                .where('list_id', list_id);
-            return data;
-        });
-    }
-    deleteTaskList(list_id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.db('todo_lists')
-                .withSchema(this.SCHEMA_DBO)
-                .where('list_id', list_id)
-                .del();
+                .insert(payload, 'task_id');
             return data;
         });
     }
 }
-exports.default = TodoListModel;
+exports.default = TaskModel;

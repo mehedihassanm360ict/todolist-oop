@@ -64,6 +64,7 @@ class TodoListService extends abstract_service_1.default {
                 }
                 const taskListModel = this.Model.taskListModel(trx);
                 const result = yield taskListModel.getTaskList(list_id);
+                console.log('from service', result);
                 if (!result.length) {
                     return {
                         success: false,

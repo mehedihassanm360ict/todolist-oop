@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@joi/date": "^2.1.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
@@ -15,7 +16,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-     "dev": "nodemon dist/server.js",
+    "dev": "nodemon dist/server.js",
     "start": "node dist/server.js"
   },
   "author": "",

@@ -11,7 +11,7 @@ class TodoListModel extends Schema{
     }
 
     public async createTaskList(payload: ITodoListPayload){
-        console.log({payload})
+        
         const data = await this.db('todo_lists')
         .withSchema(this.SCHEMA_DBO)
         .insert(payload, "list_id")
