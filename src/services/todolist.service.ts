@@ -32,6 +32,38 @@ class TodoListService extends AbstractServices{
             }
         })
     }
+
+    public async getTaskListsService(){
+        return await DB.transaction(async(trx) => {
+            const taskListModel = this.Model.taskListModel(trx);
+            const result = await taskListModel.getTaskLists();
+
+            return {
+                success: true,
+                code: this.StatusCode.HTTP_OK,
+                message: this.ResMsg.HTTP_OK,
+                data: result
+            }
+        })
+    }
+
+    public async getTaskListService(req:Request){
+        return await DB.transaction(async(trx) => {
+            const list_id = Number(req.params.list_id);
+            if (isNaN(list_id)) {
+                throw new Error("Invalid list_id parameter");
+            }
+            const taskListModel = this.Model.taskListModel(trx);
+            const result = await taskListModel.getTaskList(list_id);
+
+            return {
+                success: true,
+                code: this.StatusCode.HTTP_OK,
+                message: this.ResMsg.HTTP_OK,
+                data: result,
+            }
+        })
+    }
 }
 
 

@@ -14,7 +14,11 @@ class TodoListRouter extends abstract_router_1.default {
     ;
     callRouter() {
         this.router.route('/')
-            .post(this.todoListController.createTodoListController);
+            .post(this.todoListController.createTodoListController)
+            .get(this.todoListController.getTaskListsController);
+        // get single
+        this.router.route('/:list_id')
+            .get(this.todoListController.getTaskListController);
     }
 }
 exports.default = TodoListRouter;

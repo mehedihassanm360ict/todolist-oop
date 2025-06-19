@@ -6,6 +6,10 @@ class TodoListValidator {
             'string.empty': 'Title cannot be empty',
             'any.required': 'title is required'
         }),
+    });
+
+    public getSingleTodoListValidatior = Joi.object({
+        list_id: Joi.number().required()
     })
 }
 

@@ -18,6 +18,20 @@ class TodoListController extends AbstractController{
             res.status(code).json(rest);
         }
     )
+
+    public getTaskListsController = this.asyncWrapper.wrap( null, async(req:Request, res: Response) => {
+        const {code, ...rest} = await this.todoListService.getTaskListsService()
+        res.status(code).json(rest);
+    })
+
+    public getTaskListController = this.asyncWrapper.wrap(
+        {paramSchema: this.todoListValidator.getSingleTodoListValidatior},
+        async (req:Request, res: Response) => {
+            console.log('from controllers', req.params);
+            const {code, ...rest} = await this.todoListService.getTaskListService(req);
+            res.status(code).json(rest);
+        }
+    )
 }
 
 export default TodoListController;

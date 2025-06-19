@@ -41,5 +41,37 @@ class TodoListService extends abstract_service_1.default {
             }));
         });
     }
+    getTaskListsService() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield database_1.DB.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                const taskListModel = this.Model.taskListModel(trx);
+                const result = yield taskListModel.getTaskLists();
+                return {
+                    success: true,
+                    code: this.StatusCode.HTTP_OK,
+                    message: this.ResMsg.HTTP_OK,
+                    data: result
+                };
+            }));
+        });
+    }
+    getTaskListService(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield database_1.DB.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                const list_id = Number(req.params.list_id);
+                if (isNaN(list_id)) {
+                    throw new Error("Invalid list_id parameter");
+                }
+                const taskListModel = this.Model.taskListModel(trx);
+                const result = yield taskListModel.getTaskList(list_id);
+                return {
+                    success: true,
+                    code: this.StatusCode.HTTP_OK,
+                    message: this.ResMsg.HTTP_OK,
+                    data: result,
+                };
+            }));
+        });
+    }
 }
 exports.default = TodoListService;

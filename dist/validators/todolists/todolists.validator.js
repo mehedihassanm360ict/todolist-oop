@@ -12,6 +12,9 @@ class TodoListValidator {
                 'any.required': 'title is required'
             }),
         });
+        this.getSingleTodoListValidatior = joi_1.default.object({
+            list_id: joi_1.default.number().required()
+        });
     }
 }
 exports.default = TodoListValidator;

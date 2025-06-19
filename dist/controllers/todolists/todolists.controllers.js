@@ -35,6 +35,15 @@ class TodoListController extends abstract_controller_1.default {
             const _a = yield this.todoListService.createTodoListService(req), { code } = _a, rest = __rest(_a, ["code"]);
             res.status(code).json(rest);
         }));
+        this.getTaskListsController = this.asyncWrapper.wrap(null, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const _a = yield this.todoListService.getTaskListsService(), { code } = _a, rest = __rest(_a, ["code"]);
+            res.status(code).json(rest);
+        }));
+        this.getTaskListController = this.asyncWrapper.wrap({ paramSchema: this.todoListValidator.getSingleTodoListValidatior }, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log('from controllers', req.params);
+            const _a = yield this.todoListService.getTaskListService(req), { code } = _a, rest = __rest(_a, ["code"]);
+            res.status(code).json(rest);
+        }));
     }
 }
 exports.default = TodoListController;

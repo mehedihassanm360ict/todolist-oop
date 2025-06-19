@@ -11,7 +11,12 @@ class TodoListRouter extends AbstractRouter {
 
     private callRouter(){
         this.router.route('/')
-        .post(this.todoListController.createTodoListController);
+        .post(this.todoListController.createTodoListController)
+        .get(this.todoListController.getTaskListsController);
+
+        // get single
+        this.router.route('/:list_id')
+        .get(this.todoListController.getTaskListController);
     }
 }
 
